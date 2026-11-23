@@ -1,0 +1,16 @@
+{
+  "name": "understory",
+  "owner": {
+    "name": "SkayKapadia"
+  },
+  "metadata": {
+    "description": "The Claude Code plugin for the Understory VS Code extension: predict what Claude will change, then review the surprises first."
+  },
+  "plugins": [
+    {
+      "name": "understory",
+      "source": "./plugin",
+      "description": "Sends local run start and end events to the Understory VS Code extension. Makes no network calls."
+    }
+  ]
+}
