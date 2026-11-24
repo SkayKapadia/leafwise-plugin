@@ -116,6 +116,9 @@ var import_child_process = require("child_process");
 var GitTimeoutError = class extends Error {
 };
 var DEFAULT_TIMEOUT_MS = 1e4;
+function isTreeId(v) {
+  return typeof v === "string" && /^[0-9a-f]{40,64}$/.test(v);
+}
 function git(cwd, args, opts = {}) {
   let timeout = opts.timeoutMs ?? DEFAULT_TIMEOUT_MS;
   if (opts.deadline !== void 0) {
@@ -173,14 +176,18 @@ function snapshot(root, deadline = Date.now() + SNAPSHOT_BUDGET_MS, indexPath) {
   try {
     try {
       const idx = indexPath ?? gitText(root, ["rev-parse", "--path-format=absolute", "--git-path", "index"], { deadline });
-      if (idx && fs2.existsSync(idx)) fs2.copyFileSync(idx, tmp);
+      if (idx && fs2.existsSync(idx)) {
+        fs2.copyFileSync(idx, tmp);
+        const st = fs2.statSync(idx);
+        fs2.utimesSync(tmp, st.atime, st.mtime);
+      }
     } catch {
       removeFile(tmp);
     }
     const env = { ...process.env, GIT_INDEX_FILE: tmp };
     git(root, ["add", "-A"], { env, deadline });
     const tree = gitText(root, ["write-tree"], { env, deadline });
-    return /^[0-9a-f]{40,64}$/.test(tree) ? tree : null;
+    return isTreeId(tree) ? tree : null;
   } catch {
     return null;
   } finally {
