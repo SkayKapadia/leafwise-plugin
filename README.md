@@ -16,6 +16,14 @@ The plugin's only job is to tell the extension when a Claude Code run starts and
 
 Requirements: git 2.31 or later and Node 18 or later on your PATH.
 
+## Your code stays on your machine
+
+- **Nothing is sent anywhere.** Leafwise makes no network calls, so it has no way to push, upload or share your code, your prompts or anything else. Its tests fail if any code tries to connect.
+- **The plugin's script never opens your source files.** It asks git, on your machine, for a snapshot. Git reads the files and keeps the snapshot inside your own repo's `.git` folder, as `git stash -u` would. Git never pushes these snapshots and removes them later through its normal cleanup.
+- **The review happens in your editor.** The extension shows you the diff between two snapshots, locally. Its saved history holds counts and outcomes, never file paths or code.
+
+What it does keep locally: the snapshots above (which include any untracked file you have not added to `.gitignore`), and for about 48 hours one line per run with the time, the folder and the snapshot id, readable only by you.
+
 ## What the plugin does
 
 On each prompt you submit, and each time Claude stops, its hook (`plugin/hooks/emit.js`) runs once. It:
