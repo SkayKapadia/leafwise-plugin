@@ -6,7 +6,7 @@ The plugin's only job is to tell the extension when a Claude Code run starts and
 
 ## Install
 
-1. Install the **Leafwise** extension from the VS Code Marketplace (or Open VSX for Cursor and Windsurf).
+1. Install the **Leafwise** extension. It is not on the VS Code Marketplace yet, so download [`leafwise.vsix`](https://github.com/SkayKapadia/leafwise-plugin/releases/latest/download/leafwise.vsix) from the [latest release](https://github.com/SkayKapadia/leafwise-plugin/releases/latest). Then, in VS Code, Cursor or Windsurf, open the Extensions view, click the **…** menu, choose **Install from VSIX…**, and pick the file.
 2. In Claude Code, run:
 
    ```
