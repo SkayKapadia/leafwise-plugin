@@ -1,17 +1,17 @@
 {
-  "name": "understory",
+  "name": "leafwise",
   "version": "0.1.0",
-  "description": "Sends local run start and end events to the Understory VS Code extension. Makes no network calls.",
+  "description": "Sends local run start and end events to the Leafwise VS Code extension. Makes no network calls.",
   "author": {
     "name": "SkayKapadia"
   },
-  "homepage": "https://github.com/SkayKapadia/understory-plugin",
-  "repository": "https://github.com/SkayKapadia/understory-plugin",
+  "homepage": "https://github.com/SkayKapadia/leafwise-plugin",
+  "repository": "https://github.com/SkayKapadia/leafwise-plugin",
   "license": "MIT",
   "keywords": [
     "vscode",
     "review",
     "predict",
-    "understory"
+    "leafwise"
   ]
 }

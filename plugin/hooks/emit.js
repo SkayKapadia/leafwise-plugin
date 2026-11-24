@@ -44,12 +44,12 @@ function currentPlatform() {
   return { platform: process.platform, env: process.env, homedir: os.homedir() };
 }
 function eventsDir(ctx = currentPlatform()) {
-  if (ctx.env.UNDERSTORY_EVENTS_DIR) return ctx.env.UNDERSTORY_EVENTS_DIR;
+  if (ctx.env.LEAFWISE_EVENTS_DIR) return ctx.env.LEAFWISE_EVENTS_DIR;
   if (ctx.platform === "win32") {
     const base = ctx.env.LOCALAPPDATA || path.win32.join(ctx.homedir, "AppData", "Local");
-    return path.win32.join(base, "understory");
+    return path.win32.join(base, "leafwise");
   }
-  return path.posix.join(ctx.homedir, ".understory");
+  return path.posix.join(ctx.homedir, ".leafwise");
 }
 function normalizePath(input, platform = process.platform, resolveLinks = true) {
   let p = input.trim();
@@ -139,7 +139,7 @@ function gitText(cwd, args, opts = {}) {
 
 // src/git/snapshot.ts
 var SNAPSHOT_BUDGET_MS = 2e3;
-var TEMP_PREFIX = "understory-";
+var TEMP_PREFIX = "leafwise-";
 var STALE_TEMP_MS = 60 * 60 * 1e3;
 function findRepoFast(cwd, env = process.env) {
   if (env.GIT_DIR || env.GIT_WORK_TREE || env.GIT_INDEX_FILE || env.GIT_CEILING_DIRECTORIES) return void 0;
